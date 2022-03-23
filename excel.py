@@ -3,14 +3,16 @@ import pyautogui as ptgui
 import time
 
 resp = int(input("Qual opção você quer? "))
-pos = 100 + (50 * resp)
+pos = 70 + (50 * resp)
 
 i = 0
 j = 1
 
-ptgui.hotkey('win', '8')
+ptgui.hotkey('win', '7')
 
 ptgui.PAUSE = .5
+
+# ptgui.moveTo(1085, 81)
 
 while(i < 3):
     ptgui.hotkey("ctrl", "1")
@@ -27,7 +29,7 @@ while(i < 3):
             ptgui.press("down")
         ptgui.press("enter")
         
-        ptgui.moveTo(512,280)
+        ptgui.moveTo(512,250)
         ptgui.scroll(500 * j)
         ptgui.click(512, 280)
         

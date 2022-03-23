@@ -24,6 +24,8 @@ while(i < 3):
     ptgui.click(1086, 587)
 
     l = j
+    ptgui.press("down")
+    
     while j < l + 5:
         for t in range(j):
             ptgui.press("down")

@@ -1,4 +1,3 @@
-from turtle import position
 import pyautogui as ptgui
 import time
 
@@ -8,7 +7,7 @@ pos = 70 + (50 * resp)
 i = 0
 j = 1
 
-ptgui.hotkey('win', '7')
+ptgui.hotkey('win', '4')
 
 ptgui.PAUSE = .5
 

@@ -1,10 +1,10 @@
-from dis import dis
-from pydoc import describe
-from tkinter.tix import IMAGE
-from turtle import distance
 import pygame  # Biblioteca de criação de jogos
 import random  # Gera números aleatórios
 import os  # Integra esse código com os arquivos
+import neat
+
+ai_playing = True
+gen = 0
 
 SCREEN_WIDTH = 500
 SCREEN_HEIGTH = 800
@@ -25,7 +25,9 @@ IMAGES_BIRD = [
     pygame.transform.scale2x(pygame.image.load(
         os.path.join('imgs', 'bird2.png'))),
     pygame.transform.scale2x(pygame.image.load(
-        os.path.join('imgs', 'bird3.png')))
+        os.path.join('imgs', 'bird3.png'))),
+    pygame.transform.scale2x(pygame.image.load(
+        os.path.join('imgs', 'spiderman.png')))
 ]
 
 pygame.font.init()  # Inicializa a fonte
@@ -53,7 +55,7 @@ class Bird:
         self.heigth = self.y
         self.time = 0
         self.img_count = 0
-        self.img = self.IMGS[0]
+        self.img = self.IMGS[3]
 
     def jump(self):
         self.jump_h = -8.5
@@ -90,20 +92,20 @@ class Bird:
         self.img_count += 1
 
         if self.img_count < self.ANIM_TIME:
-            self.img = self.IMGS[0]
+            self.img = self.IMGS[3]
         elif self.img_count < self.ANIM_TIME*2:
-            self.img = self.IMGS[1]
+            self.img = self.IMGS[3]
         elif self.img_count < self.ANIM_TIME*3:
-            self.img = self.IMGS[2]
+            self.img = self.IMGS[3]
         elif self.img_count < self.ANIM_TIME*3:
-            self.img = self.IMGS[1]
+            self.img = self.IMGS[3]
         elif self.img_count >= self.ANIM_TIME*4 + 1:
-            self.img = self.IMGS[0]
+            self.img = self.IMGS[3]
             self.img_count = 0
 
         # Não bater asa quando o pássaro está caindo
         if self.angle <= -80:
-            self.img = self.IMGS[1]
+            self.img = self.IMGS[3]
             self.img_count = self.ANIM_TIME*2
 
         # Printar

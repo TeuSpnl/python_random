@@ -49,21 +49,21 @@ class Bird:
         self.y = y
 
         self.angle = 0
-        self.velocity = 0
+        self.jump_h = 0  # Altura do pulo
         self.heigth = self.y
         self.time = 0
         self.img_count = 0
         self.img = self.IMGS[0]
 
     def jump(self):
-        self.velocity = -8.5
+        self.jump_h = -8.5
         self.time = 0  # É o início do deslocamento dele
         self.heigth = self.y
 
     def move(self):  # Essa função acontece o tempo todo
         # Calcula o deslocamento
         self.time += 1
-        displacement = 1.5 * (self.time**2) + self.velocity * self.time
+        displacement = 1.5 * (self.time**2) + self.jump_h * self.time
         # S = So + Vot + at^2/2
 
         # Restringir o deslocamento (para o pássaro não ficar acelerando infinitamente para baixo ou pra cima)
@@ -115,7 +115,7 @@ class Bird:
         img_center_pos = self.img.get_rect(topleft=(self.x, self.y)).center
         # get_rect sesenha o objeto dentro de um retângulo, é sempre usado para desenhar um objeto rotacionado na tela
         retangle = rotate_img.get_rect(center=img_center_pos)
- 
+
         # Denha na tela a imagem e a posição que você quer desenhar ela.
         screen.blit(rotate_img, retangle.topleft)
 
@@ -187,7 +187,7 @@ class Base:
         if self.x0 + self.WIDTH < 0:
             self.x0 = self.x1 + self.WIDTH
         if self.x1 + self.WIDTH < 0:
-            self.x1 = self.x0 +self.WIDTH
+            self.x1 = self.x0 + self.WIDTH
 
     def draw(self, screen):
         screen.blit(self.IMG, (self.x0, self.y))

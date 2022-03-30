@@ -1,3 +1,4 @@
+from http.client import NotConnected
 import pygame  # Biblioteca de criação de jogos
 import random  # Gera números aleatórios
 import os  # Integra esse código com os arquivos
@@ -208,13 +209,37 @@ def drawScreen(screen, birds, pipes, base, points):
     # O 1 ali é só pro texto não ficar pixelado e o fim é cor
     text = FONT_POINTS.render(f"Pontuação: {points}", 1, (255, 255, 255))
     screen.blit(text, (SCREEN_WIDTH - 20 - text.get_width(), 20))  # (x, y)
+
+    if ai_playing:
+        text = FONT_POINTS.render(f"Geração: {gen}", 1, (255, 255, 255))
+        screen.blit(text, (20, 20))  # (x, y)
+
     base.draw(screen)
 
     pygame.display.update()
 
 
-def main():
-    birds = [Bird(230, 350)]
+def main(genomas, config):  # Fitness function (Diz quão bem um pássaro foi)
+    global gen
+    gen += 1
+
+    if ai_playing:  # IA Criando pássaros
+        # O pássaro corresponde ao primeiro genoma que corresponde à primeira rede neural, o segundo ao segundo ao segundo... (Não é necessário ser uma lista, pode ser uma tupla, mas o Lira achou mais simples)
+        networks = []
+        genoma_list = []
+        birds = []
+
+        for _, genoma in genomas:  # Eu percorro a lista de genomas, crio a rede neural e crio o pásssaro
+            network = neat.nn.FeedForwardNetwork.create(genoma, config)
+            # Diz à rede neural se ele é bom ou pior, que não apenas a pontuação do jogo
+            genoma.fitness = 0
+            # Uma rede neural sempre tem que ter incentivos e punições.
+
+            networks.append(network)
+            genoma_list.append(genoma)
+            birds.append(Bird(230, 350))
+    else:
+        birds = [Bird(230, 350)]
     base = Base(730)
     pipes = [Pipe(700)]
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGTH))
@@ -230,13 +255,33 @@ def main():
                 pygame.quit()
                 quit()
 
-            if event.type == pygame.KEYDOWN:  # Verifica se o player apertou espaço
-                if event.key == pygame.K_SPACE:
-                    for bird in birds:
-                        bird.jump()
+            if not ai_playing:
+                if event.type == pygame.KEYDOWN:  # Verifica se o player apertou espaço
+                    if event.key == pygame.K_SPACE:
+                        for bird in birds:
+                            bird.jump()
 
-        for bird in birds:
+        index_pipe = 0
+
+        if len(birds) > 0:
+            if len(pipes) > 1 and birds[0].x > (pipes[0].x + pipes[0].PIPE_TOP.get_width()):
+                index_pipe = 1
+        else:
+            False
+            break
+
+        for i, bird in enumerate(birds):
             bird.move()  # Move os pássaros
+            # Premiação à rede neural por ter movido o pássaro (incentivo)
+            genoma_list[i].fitness += 0.1
+
+            output = networks[i].activate((bird.y,
+                                           abs(bird.y -
+                                               pipes[index_pipe].heigth),
+                                           abs(bird.y - pipes[index_pipe].pos_bottom)))  # Você ativa a rede neural e ela te dá o output dela
+
+            if output[0] > .5:
+                bird.jump()
         base.move()  # Move o chão
 
         # Verifica se houve colisão e se deve criar, ou não, um novo cano
@@ -246,6 +291,11 @@ def main():
             for i, bird in enumerate(birds):
                 if pipe.bump(bird):
                     birds.pop(i)
+                    if ai_playing:
+                        genoma_list[i].fitness -= 1
+                        genoma_list.pop(i)
+                        networks.pop(i)
+
                 if not pipe.passed and bird.x > pipe.x:
                     pipe.passed = True
                     add_pipe = True
@@ -258,6 +308,8 @@ def main():
         if add_pipe:
             points += 1
             pipes.append(Pipe(600))
+            for genoma in genoma_list:
+                genoma.fitness += 3
 
         # Remove os canos que é pra remover
         for pipe in remove_pipes:
@@ -267,9 +319,36 @@ def main():
         for i, bird in enumerate(birds):
             if (bird.y + bird.img.get_height()) > base.y or bird.y < 0:
                 birds.pop(i)
+                if ai_playing:
+                    genoma_list[i].fitness -= 2
+                    genoma_list.pop(i)
+                    networks.pop(i)
 
         drawScreen(screen, birds, pipes, base, points)
 
 
+def start(dir_config):  # Habilita que a IA rode o jogo
+    # Determina as configurações da rede neural. Precisa dos rótulos que estão no config.txt e, no fim, o caminho do arquivo
+    config = neat.config.Config(neat.DefaultGenome,
+                                neat.DefaultReproduction,
+                                neat.DefaultSpeciesSet,
+                                neat.DefaultStagnation,
+                                dir_config)
+
+    population = neat.Population(config)
+
+    # Parâmetros que te trazem estatísticas
+    population.add_reporter(neat.StdOutReporter(True))
+    population.add_reporter(neat.StatisticsReporter())
+
+    if ai_playing:
+        # Roda a fitness_function por n vezes (Deixa o n vazio, caso queira que rode infinitamente)
+        population.run(main, 50)
+    else:
+        main(None, None)
+
+
 if __name__ == '__main__':
-    main()
+    dir = os.path.dirname(__file__)
+    dir_config = os.path.join(dir, 'config.txt')
+    start(dir_config)

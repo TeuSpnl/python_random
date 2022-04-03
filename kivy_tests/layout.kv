@@ -1,16 +1,16 @@
 #:kivy 2.1
 
-<GridLayout>
+<CustomLayout>
     canvas.before:
         BorderImage:
             # BorderImage behaves like the CSS BorderImage
-            border: 5, 5, 5, 5
-            source: 'https://wallpaperaccess.com/full/6478594.jpg'
+            border: 1, 1, 1, 1
+            texture: self.background_image.texture
             pos: self.pos
             size: self.size
 
 <RootWidget>
-    GridLayout:
+    CustomLayout:
         size_hint: .9, .9
         pos_hint: {'center_x': .5, 'center_y': .5}
         rows:1

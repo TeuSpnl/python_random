@@ -9,8 +9,8 @@ from random import randint
 
 
 class PongBall(Widget):
-    velocity_x = NumericProperty(0)
-    velocity_y = NumericProperty(0)
+    velocity_x = NumericProperty(0) #Sets the initial velocity to x axis
+    velocity_y = NumericProperty(0) #Sets the initial velocity to y axis
 
     velocity = ReferenceListProperty(velocity_x, velocity_y)
 
@@ -21,9 +21,10 @@ class PongBall(Widget):
 class PongGame(Widget):
     ball = ObjectProperty(None)
     
+    # Gives a initial movement to the ball
     def serve_ball(self):
-        self.ball.center = self.center
-        self.ball.velocity = Vector(4,0).rotate(randint(0, 360))
+        self.ball.center = self.center # The ball starts in the center of the game
+        self.ball.velocity = Vector(4,0).rotate(randint(0, 360)) #Tha ball moves to a random angle
 
     def update(self, dt):
         self.ball.move()
@@ -37,6 +38,22 @@ class PongGame(Widget):
             self.ball.velocity_x *= -1
             
         #To hook it up, we need to give the child an id and git the ball property to this id on the kv file
+        
+        def on_touch_move(self, touch):
+            if touch.x < self.width/3:
+                self.player1.center_y = touch.y
+            if touch.x > self.width - self.width/3:
+                self.player2.center_y = touch.y
+                
+class PongPaddle(Widget):
+    score = NumericProperty(0)
+    
+    def bounce_ball(self, ball):
+        if self.collide_widget(ball):
+            vy, vx = ball.velocity
+            speedup = 1.1
+            offset = 0.02 * Vector(0, ball.center_y - self.center_y)
+            ball.velocity = speedup * (offset - ball.velocity)
 
 
 class PongApp(App):

@@ -1,15 +1,19 @@
-from cgitb import text
-from itertools import count
+from kivy.app import App
 from kivy.uix.button import Button
 from kivy.uix.widget import Widget
-from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.stacklayout import StackLayout
 from kivy.properties import StringProperty, BooleanProperty
 
 
-class WidgetsExample(GridLayout):
+class ImagesExample(GridLayout, Screen):
+    pass
+
+
+class WidgetsExample(GridLayout, Screen):
     count = 0
     # Specifies the default value of the property to use in the kv file
     enable_count = BooleanProperty(False)
@@ -33,11 +37,13 @@ class WidgetsExample(GridLayout):
     def on_switch_active(self, widget):
         print(widget.active)
         
+        
+        
     # def on_slider_value(self, widget): # It's raplaced by str(int(slider.value)) in the kv file
     #     format_widget = f"{widget.value:.2f}"
     #     self.slider_text = str(format_widget)
 
-class BoxLayoutExample(BoxLayout):
+class BoxLayoutExample(BoxLayout, Screen):
     # def __init__(self, **kwargs): #You use it to add graphics throw Python
     #     super().__init__(**kwargs)
         
@@ -47,14 +53,24 @@ class BoxLayoutExample(BoxLayout):
     #     self.add_widget(b2)
     pass
 
-class ScrollViewEx(ScrollView):
+
+class ScrollViewEx(ScrollView, Screen):
     pass
 
-class MainWidget(Widget):
+class MainWidget(StackLayout, Screen):
     pass
+
 
 class TheLabApp(App):
-    pass
+    def build(self):
+        sm = ScreenManager()
+        
+        sm.add_widget(MainWidget(name='main'))
+        sm.add_widget(WidgetsExample(name='widgets'))
+        sm.add_widget(BoxLayoutExample(name='boxlayout'))
+        sm.add_widget(ImagesExample(name='images'))
+        
+        return sm
 
 TheLabApp().run()
 

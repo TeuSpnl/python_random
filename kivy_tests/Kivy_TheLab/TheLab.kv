@@ -1,8 +1,8 @@
 #:kivy 2.1
 
-ImagesExample:
+# WidgetsExample:
 
-<ImagesExample@GridLayout>
+<ImagesExample>
     cols: 3
     Image:
         source: "images/cake.jpg"
@@ -81,9 +81,6 @@ ImagesExample:
 
         text: input1.text
 
-
-
-
 <BoxLayoutExample>
     orientation: "vertical"
     Button:
@@ -96,13 +93,15 @@ ImagesExample:
 
 <MainWidget>
     Button:
-        text: "Hello"
-        size: "100dp", "80dp"
-        pos: 100, 200
-        color: .5, .6, 1, 1
+        text: "Box"
+        size_hint: .8, .333333333333333
+
+
+    Button:
+        text: "Widgets"
+        size_hint: .8, .333333333333333
+
     
-    Label:
-        text: "Hello2"
-        size: "100dp", "80dp"
-        pos: "150dp", "100dp"
-        color: .5, .6, 0, 1
+    Button:
+        text: "Images"
+        size_hint: .8, .333333333333333

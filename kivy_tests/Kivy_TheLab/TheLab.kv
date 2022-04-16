@@ -1,6 +1,18 @@
 #:kivy 2.1
 
-WidgetsExample:
+ImagesExample:
+
+<ImagesExample@GridLayout>
+    cols: 3
+    Image:
+        source: "images/cake.jpg"
+    Image:
+        source: "images/images.jpg"
+        allow_stretch: True
+    Image:
+        source: "images/Random.jpg"
+        allow_stretch: True
+        keep_ratio: False # It only works with true allow_stretch
 
 <WidgetsExample>
     cols: 3
@@ -56,9 +68,21 @@ WidgetsExample:
             disabled: not switch1.active
 
     TextInput:
+        id: input1
         size_hint: None, 1
         width: "100dp"
         text: "Saaaave"
+        multiline: True # Default: True. It enables/disables the enter function
+        on_text_validate: # If multiline is false, when you press enter, it will execute what's inside this property
+
+    Label:
+        font_name: "fonts/Strong-Regular"
+        font_size: "80dp"
+
+        text: input1.text
+
+
+
 
 <BoxLayoutExample>
     orientation: "vertical"

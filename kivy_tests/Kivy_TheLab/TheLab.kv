@@ -1,9 +1,64 @@
 #:kivy 2.1
 
-ScrollViewEx:
+WidgetsExample:
 
-<WidgetsExample@GridLayout>:
-    
+<WidgetsExample>
+    cols: 3
+
+    ToggleButton:
+        text: "OFF"
+        on_state: root.on_toggle_state(self)
+        size_hint: None, 1
+        width: "100dp"
+
+    Button:
+        text: "Count"
+        on_press: root.on_button_click()
+        disabled: not root.enable_count
+
+    Label:
+        text: root.my_text
+        font_name: "fonts/Strong-Regular"
+        font_size: "80dp"
+        color: 1, .5, .1, 1
+
+    Switch:
+        id: switch1
+        size_hint: None, 1
+        width: "100dp"
+        on_active: root.on_switch_active(self)
+        active: True
+
+    Slider:
+        id: slider1
+        disabled: not switch1.active # The slider will only work when the switch is on
+        min: 0
+        max: 100
+        value: 50 # Sets the initial value of the slider
+        orientation: 'vertical'
+        # on_value: root.on_slider_value(self)  # It's raplaced by str(int(slider.value)) in the Label
+        step: 1
+        value_track: True
+        value_track_color: .1, .5, 1, 1
+
+    BoxLayout:
+        orientation: "vertical"
+
+        Label:
+            text: str(int(slider1.value))
+            font_name: "fonts/Strong-Regular"
+            font_size: "80dp"
+            disabled: not switch1.active
+
+        ProgressBar:
+            max: 100
+            value: slider1.value
+            disabled: not switch1.active
+
+    TextInput:
+        size_hint: None, 1
+        width: "100dp"
+        text: "Saaaave"
 
 <BoxLayoutExample>
     orientation: "vertical"

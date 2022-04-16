@@ -1,12 +1,44 @@
 from cgitb import text
+from itertools import count
 from kivy.uix.button import Button
 from kivy.uix.widget import Widget
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
+from kivy.uix.gridlayout import GridLayout
+from kivy.properties import StringProperty, BooleanProperty
+
+
+class WidgetsExample(GridLayout):
+    count = 0
+    # Specifies the default value of the property to use in the kv file
+    enable_count = BooleanProperty(False)
+    my_text = StringProperty(str(count))
+    slider_text = StringProperty("0")
+    
+    def on_button_click(self):
+        self.count += 1
+        self.my_text = str(self.count)
+        
+    def on_toggle_state(self, widget):
+        #widget.state shows if the button is normal or down
+        if widget.state == "normal":
+            widget.text = "OFF"
+            self.enable_count = False
+            
+        elif widget.state == "down":
+            widget.text = "ON"
+            self.enable_count = True
+            
+    def on_switch_active(self, widget):
+        print(widget.active)
+        
+    # def on_slider_value(self, widget): # It's raplaced by str(int(slider.value)) in the kv file
+    #     format_widget = f"{widget.value:.2f}"
+    #     self.slider_text = str(format_widget)
 
 class BoxLayoutExample(BoxLayout):
-    # def __init__(self, **kwargs):
+    # def __init__(self, **kwargs): #You use it to add graphics throw Python
     #     super().__init__(**kwargs)
         
     #     b1 = Button(text = "Hello")
@@ -25,3 +57,11 @@ class TheLabApp(App):
     pass
 
 TheLabApp().run()
+
+# Extra notes:
+# 
+# 
+# 
+# 
+# 
+# 

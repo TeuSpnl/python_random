@@ -57,7 +57,7 @@ class BoxLayoutExample(BoxLayout, Screen):
 class ScrollViewEx(ScrollView, Screen):
     pass
 
-class MainWidget(StackLayout, Screen):
+class MainWidget(BoxLayout, Screen):
     pass
 
 
@@ -67,13 +67,14 @@ class TheLabApp(App):
         
         sm.add_widget(MainWidget(name='main'))
         sm.add_widget(WidgetsExample(name='widgets'))
-        sm.add_widget(BoxLayoutExample(name='boxlayout'))
+        sm.add_widget(BoxLayoutExample(name='box'))
         sm.add_widget(ImagesExample(name='images'))
         
         return sm
 
-TheLabApp().run()
-
+if __name__ == '__main__':
+    TheLabApp().run()
+    
 # Extra notes:
 # 
 # 

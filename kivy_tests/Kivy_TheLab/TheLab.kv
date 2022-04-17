@@ -14,6 +14,10 @@
         allow_stretch: True
         keep_ratio: False # It only works with true allow_stretch
 
+    Button:
+        text: "Back"
+        on_press: root.manager.current = "main"
+
 <WidgetsExample>
     cols: 3
 
@@ -47,8 +51,8 @@
         min: 0
         max: 100
         value: 50 # Sets the initial value of the slider
-        orientation: 'vertical'
-        # on_value: root.on_slider_value(self)  # It's raplaced by str(int(slider.value)) in the Label
+        orientation: "vertical"
+        # on_value: root.on_slider_value(self)  # It"s raplaced by str(int(slider.value)) in the Label
         step: 1
         value_track: True
         value_track_color: .1, .5, 1, 1
@@ -73,13 +77,17 @@
         width: "100dp"
         text: "Saaaave"
         multiline: True # Default: True. It enables/disables the enter function
-        on_text_validate: # If multiline is false, when you press enter, it will execute what's inside this property
+        on_text_validate: # If multiline is false, when you press enter, it will execute what"s inside this property
 
     Label:
         font_name: "fonts/Strong-Regular"
         font_size: "80dp"
 
         text: input1.text
+    
+    Button:
+        text: "Back"
+        on_press: root.manager.current = "main"
 
 <BoxLayoutExample>
     orientation: "vertical"
@@ -91,17 +99,23 @@
     Button:
         text: "C"
 
+    Button:
+        text: "Back"
+        on_press: root.manager.current = "main"
+
 <MainWidget>
+    orientation: "vertical"
+    padding: 20, 0
+    spacing: 5
+
     Button:
         text: "Box"
-        size_hint: .8, .333333333333333
-
+        on_press: root.manager.current = "box"
 
     Button:
         text: "Widgets"
-        size_hint: .8, .333333333333333
+        on_press: root.manager.current = "widgets"
 
-    
     Button:
         text: "Images"
-        size_hint: .8, .333333333333333
+        on_press: root.manager.current = "images"

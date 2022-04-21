@@ -19,34 +19,33 @@ class WidgetsExample(GridLayout, Screen):
     enable_count = BooleanProperty(False)
     my_text = StringProperty(str(count))
     slider_text = StringProperty("0")
-    
+
     def on_button_click(self):
         self.count += 1
         self.my_text = str(self.count)
-        
+
     def on_toggle_state(self, widget):
-        #widget.state shows if the button is normal or down
+        # widget.state shows if the button is normal or down
         if widget.state == "normal":
             widget.text = "OFF"
             self.enable_count = False
-            
+
         elif widget.state == "down":
             widget.text = "ON"
             self.enable_count = True
-            
+
     def on_switch_active(self, widget):
         print(widget.active)
-        
-        
-        
+
     # def on_slider_value(self, widget): # It's raplaced by str(int(slider.value)) in the kv file
     #     format_widget = f"{widget.value:.2f}"
     #     self.slider_text = str(format_widget)
 
+
 class BoxLayoutExample(BoxLayout, Screen):
     # def __init__(self, **kwargs): #You use it to add graphics throw Python
     #     super().__init__(**kwargs)
-        
+
     #     b1 = Button(text = "Hello")
     #     b2 = Button(text = "B")
     #     self.add_widget(b1)
@@ -57,6 +56,7 @@ class BoxLayoutExample(BoxLayout, Screen):
 class ScrollViewEx(ScrollView, Screen):
     pass
 
+
 class MainWidget(BoxLayout, Screen):
     pass
 
@@ -64,21 +64,22 @@ class MainWidget(BoxLayout, Screen):
 class TheLabApp(App):
     def build(self):
         sm = ScreenManager()
-        
+
         sm.add_widget(MainWidget(name='main'))
         sm.add_widget(WidgetsExample(name='widgets'))
         sm.add_widget(BoxLayoutExample(name='box'))
         sm.add_widget(ImagesExample(name='images'))
-        
+
         return sm
+
 
 if __name__ == '__main__':
     TheLabApp().run()
-    
+
 # Extra notes:
-# 
-# 
-# 
-# 
-# 
-# 
+#
+#
+#
+#
+#
+#

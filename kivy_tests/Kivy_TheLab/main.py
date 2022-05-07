@@ -33,10 +33,6 @@ class WidgetsExample(GridLayout, Screen):
         elif widget.state == "down":
             widget.text = "ON"
             self.enable_count = True
-
-    def on_switch_active(self, widget):
-        print(widget.active)
-
     # def on_slider_value(self, widget): # It's raplaced by str(int(slider.value)) in the kv file
     #     format_widget = f"{widget.value:.2f}"
     #     self.slider_text = str(format_widget)

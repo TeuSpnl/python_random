@@ -1,7 +1,7 @@
 import pyautogui as ptgui
 import time
 
-ptgui.hotkey('win', '7')
+ptgui.hotkey('win', '5')
 
 i = 0
 

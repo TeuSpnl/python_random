@@ -7,7 +7,7 @@ i = 0
 
 time.pause = 5
 
-while (i < 1000):
+while (i < 500):
     ptgui.hotkey("ctrl", "v")
     ptgui.press("enter")
     i += 1

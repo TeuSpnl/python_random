@@ -1,6 +1,3 @@
-from turtle import pen
-
-
 lista = []
 
 for i in range(5):

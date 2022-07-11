@@ -1,6 +1,3 @@
-from re import M
-
-
 lista = ('Borracha', 1.5,
          '20 Lápis', 10,
          'Caderno', 15,

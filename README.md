@@ -6,7 +6,8 @@
    2. Bot para encaminhamento automático no  WhatsApp usando o PyAutoGUI
    3. Inteligência Artificial no jogo FlappyBird, seguindo as aulas do Lira, da Hashtag Programação
    4. Criação do jogo Pong usando o Kivy
+   5. Criação de layouts usando Kivy
 
 ## Projeto(s) em progresso
 
-   1. Criação de layouts usando Kivy
+   6. Curso de Python mundo 1, 2 e 3 do Curso em Vídeo

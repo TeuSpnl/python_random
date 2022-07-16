@@ -1,25 +1,25 @@
 def notas(*n, sit=False):
+    """
+    -> Função que analisa notas e situações de alunos
+    
+    :param n: valor da(s) nota(s) do aluno
+    :param sit: (opcional) Indica se deve ou não aparecer a situação do aluno
+    :return: dicionário com várias informações sobre o aluno
+    """
+    
     ficha = {}
-
-    for i, nota in enumerate(n):
-        if i == 0:
-            menor = maior = nota
-        elif nota > maior:
-            maior = nota
-        elif nota < menor:
-            menor = nota
-
+    
     media = sum(n) / len(n)
 
     ficha['total'] = len(n)
-    ficha['maior'] = maior
-    ficha['menor'] = menor
+    ficha['maior'] = max(n)
+    ficha['menor'] = min(n)
     ficha['media'] = media
 
     if sit:
         if media >= 7:
             ficha['situação'] = 'Aprovado'
-        elif 7 < media > 5:
+        elif media >= 5:
             ficha['situação'] = 'Recuperação'
         else:
             ficha['situação'] = 'Reprovado'

@@ -7,6 +7,11 @@ def leiaInt(msg):
             print("\033[31mErro!")
             print("Você tem que digitar um número inteiro!\033[m\n")
 
+        except KeyboardInterrupt:
+            print("\033[31mErro!")
+            print("Entrada interrompida pelo usuário.\033[m\n")
+            return 0
+            
         except Exception as e:
             print("\033[31mErro!")
             print(f"Classe do erro: {e.__class__}\033[m\n")
@@ -25,6 +30,11 @@ def leiaFloat(msg):
         except ValueError:
             print("\033[31mErro!")
             print("Você tem que digitar um número real!\033[m\n")
+            
+        except KeyboardInterrupt:
+            print("\033[31mErro!")
+            print("Entrada interrompida pelo usuário.\033[m\n")
+            return 0
 
         except Exception as e:
             print("\033[31mErro!")

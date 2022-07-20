@@ -1,10 +1,12 @@
-from menu import menus
+import menu, funcoes
 
 while True:
-    ans = menus.main_menu()
+    ans = menu.main_menu(["Ver pessoas cadastradas", "Cadastrar nova pessoa", "Sair do Sistema"])
 
-    
-    if ans == 3:
+    if ans == 1:
+        funcoes.op1()
+    elif ans == 2:
+        funcoes.op2()
+    elif ans == 3:
+        funcoes.op3()
         break
-    
-print("Programa finalizado.")

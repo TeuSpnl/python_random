@@ -34,10 +34,17 @@ def leiaInt(msg):
     return n
 
 def op1():
-    titulo("Opção 1")
-
+    titulo("Lista de Pessoas Cadastradas")
+    
+    arquivo = open("ex115/Pessoas_cadastradas.txt", "a")
+    
+    for linha in arquivo.readline():
+        print(linha)
+    
+    arquivo.close()
+    
 def op2():
-    titulo("Opção 2")
+    titulo("Cadastrar uma Nova Pessoa")
 
 def op3():
     titulo("Finalizando...")

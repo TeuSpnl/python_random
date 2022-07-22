@@ -36,11 +36,20 @@ def leiaInt(msg):
 def op1():
     titulo("Lista de Pessoas Cadastradas")
     
-    arquivo = open("ex115/Pessoas_cadastradas.txt", "a")
+    try:
+        arquivo = open("ex115/Pessoas_cadastradas.txt", "r")
+    except (FileNotFoundError):
+        arquivo = open("ex115/Pessoas_cadastradas.txt", "a")
+        arquivo = open("ex115/Pessoas_cadastradas.txt", "r")
+    except Exception as e:
+        print(f"Erro classe {e.__class__}.")
     
-    for linha in arquivo.readline():
-        print(linha)
-    
+    try:
+        for linha in arquivo.readlines():
+            print(linha)
+    except Exception as e:
+        print(f"Erro classe {e.__class__}")
+        
     arquivo.close()
     
 def op2():

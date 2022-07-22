@@ -1,2 +1,2 @@
-Pedro;55
-João;98
+Pedro; 40
+João; 55

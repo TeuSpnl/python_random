@@ -1,2 +1,4 @@
-Pedro; 40
-João; 55
+Mateus;58
+Carlos;150
+Jos� Queiroz da Silva Pereira;12
+Marcos Feliciano Da Costa Silva;5

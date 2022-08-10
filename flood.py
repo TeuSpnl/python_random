@@ -1,16 +1,12 @@
 import pyautogui as ptgui
 import time
 
-ptgui.hotkey('win', '3')
+ptgui.hotkey('win', '7
+             ')
 
 i = 0
 
-while (i < 65):
-    ptgui.press("f2")
-    ptgui.press("end")
-    ptgui.press("backspace")
-    ptgui.press("v")
+while (i < 500):
+    ptgui.hotkey("crtl", "v")
     ptgui.press("enter")
-    ptgui.press("enter")
-    ptgui.press("down")
     i += 1

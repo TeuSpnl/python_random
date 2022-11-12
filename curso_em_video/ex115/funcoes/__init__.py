@@ -41,7 +41,7 @@ def create_doc():
         arquivo = open("ex115/Pessoas_cadastradas.txt", "wt+")
     except (FileNotFoundError):
         arquivo = open("ex115/Pessoas_cadastradas.txt", "a")
-        arquivo = open("ex115/Pessoas_cadastradas.txt", "wt+")
+        create_doc()
     except Exception as e:
         print(f"Erro classe {e.__class__}.")
 
@@ -79,7 +79,7 @@ def op2(nome, idade):
         arq = open("ex115/Pessoas_cadastradas.txt", "at")
     except (FileNotFoundError):
         arq = create_doc()
-        arq = open("ex115/Pessoas_cadastradas.txt", "at")
+        op2(nome, idade)
     except Exception as e:
         print(f"Erro classe {e.__class__}.")
     else:

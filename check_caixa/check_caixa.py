@@ -44,14 +44,13 @@ while resp.upper() == "SIM":
 
             # Abre pedido
             ptgui.press("enter")
-
-            sleep(1)
+            sleep(.6)
             # Botão alterar
             ptgui.click(246, 790)
-            sleep(.25)
+            sleep(.2)
             # Botão gravar
             ptgui.click(385, 790)
-            sleep(2)
+            sleep(1.3)
             # Fechar coprovante
             ptgui.press("esc")
             sleep(.25)
@@ -73,13 +72,13 @@ while resp.upper() == "SIM":
         for i in range(int(ans)):
             # Abre pedido
             ptgui.press("enter")
-            sleep(1)
+            sleep(.6)
             # Botão alterar
             ptgui.click(246, 790)
-            sleep(.25)
+            sleep(.2)
             # Botão gravar
             ptgui.click(385, 790)
-            sleep(2)
+            sleep(1.3)
             # Fechar coprovante
             ptgui.press("esc")
             sleep(.25)

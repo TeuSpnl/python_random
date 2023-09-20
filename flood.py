@@ -1,17 +1,22 @@
 import pyautogui as ptgui
-import time
+from time import sleep
 
-ptgui.hotkey('win', '5')
+ptgui.hotkey('win', '0')
 
 i = 0
 
-while (i < 67):
-    ptgui.write("Mateus Spinola")
+# sleep(.5)
+# ptgui.click(1060, 700)
+# sleep(1)
+# ptgui.click(985, 260)
+# sleep(1)
+
+while (i < 300):
+    # sleep(.15)
+    # ptgui.click(855, 325)
+    ptgui.hotkey('ctrl', 'v')
+    sleep(.25)
     ptgui.press("enter")
-    i += 1
-    ptgui.write("Daniel Spinola")
-    ptgui.press("enter")
-    i += 1
-    ptgui.write("Tatiana Casas")
-    ptgui.press("enter")
+
+    
     i += 1
